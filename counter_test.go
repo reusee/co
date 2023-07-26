@@ -6,9 +6,10 @@ type counterState struct {
 	n int
 }
 
-func (c *counterState) next() (int, Proc[int]) {
+func (c *counterState) next(proc *Proc[int]) int {
 	c.n++
-	return c.n, c.next
+	*proc = c.next
+	return c.n
 }
 
 func BenchmarkCounter(b *testing.B) {

@@ -16,13 +16,13 @@ func newFibState() *fibState {
 	}
 }
 
-func (f *fibState) next() (ret string, next Proc[string]) {
+func (f *fibState) next(proc *Proc[string]) (ret string) {
 	ret = f.a.String()
 	tmp := big.NewInt(0)
 	tmp.Set(f.a)
 	f.a.Set(f.b)
 	f.b.Add(f.b, tmp)
-	next = f.next
+	*proc = f.next
 	return
 }
 
